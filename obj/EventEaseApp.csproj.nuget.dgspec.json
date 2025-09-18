@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\melia\\Code\\Courses\\EventEaseApp\\eventeaseapp\\EventEaseApp.csproj": {}
+    "C:\\Users\\melia\\Code\\Courses\\EventEaseApp\\EventEaseApp\\EventEaseApp.csproj": {}
   },
   "projects": {
-    "C:\\Users\\melia\\Code\\Courses\\EventEaseApp\\eventeaseapp\\EventEaseApp.csproj": {
+    "C:\\Users\\melia\\Code\\Courses\\EventEaseApp\\EventEaseApp\\EventEaseApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\melia\\Code\\Courses\\EventEaseApp\\eventeaseapp\\EventEaseApp.csproj",
+        "projectUniqueName": "C:\\Users\\melia\\Code\\Courses\\EventEaseApp\\EventEaseApp\\EventEaseApp.csproj",
         "projectName": "EventEaseApp",
-        "projectPath": "C:\\Users\\melia\\Code\\Courses\\EventEaseApp\\eventeaseapp\\EventEaseApp.csproj",
+        "projectPath": "C:\\Users\\melia\\Code\\Courses\\EventEaseApp\\EventEaseApp\\EventEaseApp.csproj",
         "packagesPath": "C:\\Users\\melia\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\melia\\Code\\Courses\\EventEaseApp\\eventeaseapp\\obj\\",
+        "outputPath": "C:\\Users\\melia\\Code\\Courses\\EventEaseApp\\EventEaseApp\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\melia\\AppData\\Roaming\\NuGet\\NuGet.Config"

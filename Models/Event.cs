@@ -11,13 +11,13 @@ namespace EventEaseApp.Models
         public Guid Id { get; set; } = Guid.NewGuid();
 
         [Required(ErrorMessage = "Name is required")]
-        public string Name { get; set; }
+        public required string Name { get; set; }
 
         [Required(ErrorMessage = "Date is required")]
         [DataType(DataType.Date)]
         public DateTime Date { get; set; }
 
         [Required(ErrorMessage = "Location is required")]
-        public string Location { get; set; }
+        public required string Location { get; set; }
     }
 }

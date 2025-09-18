@@ -25,12 +25,12 @@
 </EditForm>
 
 @code {
-    private Event newEvent = new Event { Date = DateTime.Today };
+    private Event newEvent = new Event { Name = string.Empty, Location = string.Empty, Date = DateTime.Today };
 
     void HandleValidSubmit()
     {
         EventService.AddEvent(newEvent);
-        newEvent = new Event { Date = DateTime.Today };
+        newEvent = new Event { Name = string.Empty, Location = string.Empty, Date = DateTime.Today };
         Navigation.NavigateTo("/events");
     }
     [Inject] NavigationManager Navigation { get; set; } = default!;
