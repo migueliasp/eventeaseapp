@@ -1,0 +1,74 @@
+@page "/events/{id:guid}/register"
+@rendermode InteractiveServer
+@inject EventEaseApp.Services.AttendanceService AttendanceService
+@inject EventEaseApp.Services.EventService EventService
+@using EventEaseApp.Models
+@using Microsoft.AspNetCore.Components.Forms
+
+@code {
+    [Parameter]
+    public Guid id { get; set; }
+    private Registration registration = new Registration();
+    private Event? ev;
+    private bool submitted = false;
+
+    protected override void OnInitialized()
+    {
+        ev = EventService.GetEventById(id);
+        registration.EventId = id;
+    }
+
+    void HandleValidSubmit()
+    {
+        AttendanceService.RegisterAttendance(registration);
+        submitted = true;
+    }
+}
+
+@if (ev == null)
+{
+    <div class="event-card">
+        <div class="event-card-header">
+            <h2>Event not found</h2>
+        </div>
+        <div class="event-card-body">
+            <p>The event you are trying to register for does not exist.</p>
+        </div>
+        <a href="/events" class="btn btn-secondary" style="margin-top:1rem;">Back to Events</a>
+    </div>
+}
+else if (submitted)
+{
+    <div class="event-card">
+        <div class="event-card-header">
+            <h2>Registration Successful!</h2>
+        </div>
+        <div class="event-card-body">
+            <p>Thank you for registering for <b>@ev.Name</b>.</p>
+        </div>
+        <a href="/events/@ev.Id" class="btn btn-primary" style="margin-top:1rem;">Back to Event Details</a>
+    </div>
+}
+else
+{
+    <div class="event-card">
+        <div class="event-card-header">
+            <h2>Register for @ev.Name</h2>
+        </div>
+        <div class="event-card-body">
+            <EditForm Model="registration" OnValidSubmit="HandleValidSubmit">
+                <DataAnnotationsValidator />
+                <ValidationSummary />
+                <div class="mb-3">
+                    <label>Name:</label>
+                    <InputText @bind-Value="registration.Name" class="form-control" />
+                </div>
+                <div class="mb-3">
+                    <label>Email:</label>
+                    <InputText @bind-Value="registration.Email" class="form-control" />
+                </div>
+                <button type="submit" class="btn btn-primary">Register</button>
+            </EditForm>
+        </div>
+    </div>
+}

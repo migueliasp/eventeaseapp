@@ -1,0 +1,33 @@
+@page "/events"
+@rendermode InteractiveServer
+@inject EventEaseApp.Services.EventService EventService
+@using EventEaseApp.Models
+
+<h3>Events</h3>
+
+<a href="/register">Register New Event</a>
+
+@if (EventService.Events.Count == 0)
+{
+    <p>No events found.</p>
+}
+else
+{
+    @foreach (var ev in EventService.Events)
+    {
+        <div style="position:relative;">
+            <a href="/events/@ev.Id" style="text-decoration:none; color:inherit;">
+                <EventCard Event="ev" />
+            </a>
+            <button @onclick="() => DeleteEvent(ev.Id)" style="position:absolute; top:10px; right:10px;" class="btn btn-danger">Delete</button>
+        </div>
+    }
+}
+
+@code {
+    void DeleteEvent(Guid id)
+    {
+        EventService.DeleteEvent(id);
+        StateHasChanged();
+    }
+}

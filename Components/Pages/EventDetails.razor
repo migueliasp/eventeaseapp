@@ -1,0 +1,38 @@
+@page "/events/{id:guid}"
+@inject EventEaseApp.Services.EventService EventService
+@using EventEaseApp.Models
+
+@code {
+    [Parameter]
+    public Guid id { get; set; }
+    private Event? ev;
+
+    protected override void OnInitialized()
+    {
+        ev = EventService.GetEventById(id);
+    }
+}
+
+@if (ev == null)
+{
+    <div class="event-card">
+        <div class="event-card-header">
+            <h2>Event not found</h2>
+        </div>
+        <div class="event-card-body">
+            <p>The event you are looking for does not exist.</p>
+        </div>
+        <a href="/events" class="btn btn-secondary" style="margin-top:1rem;">Back to Events</a>
+    </div>
+}
+else
+{
+    <div class="event-card" style="max-width:500px;margin:auto;">
+        <EventCard Event="ev" />
+        <div style="display:flex; gap:1rem; margin-top:1rem;">
+            <a href="/events/@ev.Id/register" class="btn btn-success">Register Attendance</a>
+            <a href="/events/@ev.Id/attendance" class="btn btn-info">View Attendance</a>
+            <a href="/events" class="btn btn-primary">Back to Events</a>
+        </div>
+    </div>
+}

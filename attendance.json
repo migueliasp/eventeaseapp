@@ -1,0 +1,14 @@
+[
+  {
+    "Id": "106e8a3f-b34e-4ca9-82e9-16f4c495cce1",
+    "EventId": "cb46a424-079e-40f0-8fc3-53dfbb48eb9c",
+    "Name": "Miguel",
+    "Email": "here@there.com"
+  },
+  {
+    "Id": "98757b21-1ea7-47f7-a25a-d8936f3e18c7",
+    "EventId": "cb46a424-079e-40f0-8fc3-53dfbb48eb9c",
+    "Name": "more people",
+    "Email": "people@soft.com"
+  }
+]

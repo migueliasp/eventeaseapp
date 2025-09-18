@@ -1,0 +1,66 @@
+@page "/events/{id:guid}/attendance"
+@rendermode InteractiveServer
+@inject EventEaseApp.Services.AttendanceService AttendanceService
+@inject EventEaseApp.Services.EventService EventService
+@using EventEaseApp.Models
+
+@code {
+    [Parameter]
+    public Guid id { get; set; }
+    private Event? ev;
+    private List<Registration> registrations = new();
+
+    protected override void OnInitialized()
+    {
+        ev = EventService.GetEventById(id);
+        registrations = AttendanceService.GetRegistrationsForEvent(id);
+    }
+}
+
+@if (ev == null)
+{
+    <div class="event-card">
+        <div class="event-card-header">
+            <h2>Event not found</h2>
+        </div>
+        <div class="event-card-body">
+            <p>The event you are looking for does not exist.</p>
+        </div>
+        <a href="/events" class="btn btn-secondary" style="margin-top:1rem;">Back to Events</a>
+    </div>
+}
+else
+{
+    <div class="event-card" style="max-width:600px;margin:auto;">
+        <div class="event-card-header">
+            <h2>Attendance for @ev.Name</h2>
+        </div>
+        <div class="event-card-body">
+            @if (registrations.Count == 0)
+            {
+                <p>No attendees registered yet.</p>
+            }
+            else
+            {
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var reg in registrations)
+                        {
+                            <tr>
+                                <td>@reg.Name</td>
+                                <td>@reg.Email</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+        </div>
+        <a href="/events/@ev.Id" class="btn btn-primary" style="margin-top:1rem;">Back to Event Details</a>
+    </div>
+}

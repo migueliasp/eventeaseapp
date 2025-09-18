@@ -1,0 +1,37 @@
+@page "/register"
+@rendermode InteractiveServer
+@inject EventEaseApp.Services.EventService EventService
+@using EventEaseApp.Models
+@using Microsoft.AspNetCore.Components.Forms
+
+<h3>Register New Event</h3>
+
+<EditForm Model="@newEvent" OnValidSubmit="@HandleValidSubmit" FormName="registerEventForm">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <div>
+        <label>Name:</label>
+        <InputText @bind-Value="newEvent.Name" />
+    </div>
+    <div>
+        <label>Date:</label>
+        <InputDate @bind-Value="newEvent.Date" />
+    </div>
+    <div>
+        <label>Location:</label>
+        <InputText @bind-Value="newEvent.Location" />
+    </div>
+    <button type="submit">Register</button>
+</EditForm>
+
+@code {
+    private Event newEvent = new Event { Date = DateTime.Today };
+
+    void HandleValidSubmit()
+    {
+        EventService.AddEvent(newEvent);
+        newEvent = new Event { Date = DateTime.Today };
+        Navigation.NavigateTo("/events");
+    }
+    [Inject] NavigationManager Navigation { get; set; } = default!;
+}
